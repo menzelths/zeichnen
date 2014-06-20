@@ -1,0 +1,13 @@
+canvas {
+  border: solid;
+  border-width: 3px;
+  cursor: url("http://doc.qt.digia.com/qtcreator-2.1/images//element.png") 4 4 , pointer;
+}
+.container {
+  background: #ffaaaa;
+}
+path {
+  fill: none;
+  stroke-width: 2;
+  stroke: blue;
+}
