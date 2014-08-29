@@ -202,13 +202,20 @@ $(function() {
 
         var svgtext = "";
         var zaehler = 0;
+        var zeichenfarbe_alt="";
+        var zeichenbreite_alt=-1;
         $("#svgbild").html(""); // altes bild löschen
 
         var text = "";
         var letzterPunkt = kurven[0][0][3];
         for (var i = 0; i < kurven.length; i++) {
             var tmp = kurven[i][0];
-            
+            if (i>0&&(zeichenbreite_alt!==kurven[i][3]||zeichenfarbe_alt!==kurven[i][4])){
+                svgtext += "<path d='" + text + "' stroke='"+zeichenfarbe_alt+"' fill='none' stroke-width='"+zeichenbreite_alt+"'/>";
+                 //zaehler += text.length;
+                letzterPunkt = {x: -1, y: -1}; // letzten punkt zurücksetzen, so dass neuer pfad startet
+                text = "";
+            }
             // noch alte farbe und breite speichern und nur einfügen, falls sich etwas ändert
             if (i > 0 && tmp[0].x === letzterPunkt.x && tmp[0].y === letzterPunkt.y) {
                 text += " c" + runde(tmp[1].x - tmp[0].x, dezimalenSVG) + "," + runde(tmp[1].y - tmp[0].y, dezimalenSVG) + " " + runde(tmp[2].x - tmp[0].x, dezimalenSVG) + "," + runde(tmp[2].y - tmp[0].y, dezimalenSVG) + " " + runde(tmp[3].x - tmp[0].x, dezimalenSVG) + "," + runde(tmp[3].y - tmp[0].y, dezimalenSVG);
@@ -220,7 +227,7 @@ $(function() {
             if (text.length > 2000) {
                 svgtext += "<path d='" + text + "' />";
 
-                zaehler += text.length;
+                //zaehler += text.length;
                 letzterPunkt = {x: -1, y: -1}; // letzten punkt zurücksetzen, so dass neuer pfad startet
                 text = "";
                 if (svgtext.length > 10000) {
@@ -232,9 +239,11 @@ $(function() {
 
 
             }
+            zeichenbreite_alt=kurven[i][3];
+            zeichenfarbe_alt=kurven[i][4];
         }
         if (text.length > 0) {
-            svgtext += "<path d='" + text + "' />";
+            svgtext += "<path d='" + text + "' stroke='"+zeichenfarbe_alt+"' fill='none' stroke-width='"+zeichenbreite_alt+"'/>";
             $("#svgbild").append(svgtext);
             zaehler += svgtext.length;
             svgtext = "";
@@ -246,7 +255,7 @@ $(function() {
         var w = window.open("", "MsgWindow", "width=" + breite + ",height=" + hoehe);
         var html = $("#bild").html();
 
-        $(w.document.body).html("<div style='stroke-linecap: round; fill: none;stroke-width: " + stiftdicke + ";stroke: black;'>" + html + "</div>");
+        $(w.document.body).html("<div style='stroke-linecap: round' >" + html + "</div>");
 
 
 
