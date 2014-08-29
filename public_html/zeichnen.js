@@ -1,6 +1,6 @@
 
 $(function() {
-    $("body").html("<div id='rahmen' style='position: relative;'> <canvas id='layer0' width='800' height='600' style='z-index: 0;'></canvas> <canvas id='layer1' width='800' height='600' style='position: absolute; left: 0; top: 0; z-index: 1;'></canvas><canvas id='layer2' width='800' height='600' style='position: absolute; left: 0; top: 0; z-index: 2;'></canvas></div><div id='knoepfe'> <input type='button' class='holen knopf' b='Stift' id='stift' value='Stift'/><input type='button' class='holen knopf' b='Radierer' id='radierer' value='Radierer'/><input type='button' class='holen knopf' b='Raster ändern' id='raster' value='Raster an / aus' /><input type='button' class='holen knopf' b='SVG erzeugen' id='knopf' value='SVG anzeigen' /><br><input type='button' class='holen knopf' b='Alles löschen' id='loeschen' value='Alles löschen' /><br><br><input type='button' id='rot' value='Rot'/><input type='button' id='blau' value='Blau' /><br><input type='button' id='dick' value='Dick'/><input type='button' id='duenn' value='Dünn' /></div><div id='ausgabe'></div><div id='info' ></div>");
+    $("body").html("<div id='rahmen' style='position: relative;'> <canvas id='layer0' width='800' height='600' style='z-index: 0;'></canvas> <canvas id='layer1' width='800' height='600' style='position: absolute; left: 0; top: 0; z-index: 1;'></canvas><canvas id='layer2' width='800' height='600' style='position: absolute; left: 0; top: 0; z-index: 2;'></canvas></div><div id='knoepfe'> <input type='button' class='holen knopf' b='Stift' id='stift' value='Stift'/><input type='button' class='holen knopf' b='Radierer' id='radierer' value='Radierer'/><input type='button' class='holen knopf' b='Raster ändern' id='raster' value='Raster an / aus' /><input type='button' class='holen knopf' b='SVG erzeugen' id='knopf' value='SVG anzeigen' /><br><input type='button' class='holen knopf' b='Alles löschen' id='loeschen' value='Alles löschen' /><br><br><input type='button' id='rot' value='Rot' class='holen knopf' b='roter Stift'/><input type='button' id='blau' value='Blau' class='holen knopf' b='blauer Stift' /><br><input type='button' id='dick' value='Dick' class='holen knopf' b='dicker Stift'/><input type='button' id='duenn' value='Dünn' class='holen knopf' b='dünner Stift' /></div><div id='ausgabe'></div><div id='info' ></div>");
     $("body").append("<div id='bild'><svg width='800' height='600' id='svgbild'></svg></div>");
     var c = $("#layer2")[0];
     var breite = 800; // breite des zeichenbereichs
@@ -225,7 +225,7 @@ $(function() {
             }
             letzterPunkt = kurven[i][0][3];
             if (text.length > 2000) {
-                svgtext += "<path d='" + text + "' />";
+                svgtext += "<path d='" + text + "' stroke='"+zeichenfarbe_alt+"' fill='none' stroke-width='"+zeichenbreite_alt+"'/>";
 
                 //zaehler += text.length;
                 letzterPunkt = {x: -1, y: -1}; // letzten punkt zurücksetzen, so dass neuer pfad startet
